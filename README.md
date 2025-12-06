@@ -1,5 +1,7 @@
 # React + Vite
 
+This project is about a movie Web App built using Vite React, where you can be informed on trending movies or search on your own.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
