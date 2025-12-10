@@ -10,6 +10,7 @@ const MovieCard = ({
     },
 }) => {
     const Url = "https://image.tmdb.org/t/p/w500";
+    const release_year = release_date.split("-")[0];
     return (
         <div className="movie-card">
             <img
@@ -29,7 +30,7 @@ const MovieCard = ({
                     <p className="lang">{original_language}</p>
                     <span>•</span>
                     <p className="year">
-                        {release_date ? release_date.split("-")[0] : "N/A"}
+                        {release_date ? release_year : "N/A"}
                     </p>
                 </div>
             </div>
