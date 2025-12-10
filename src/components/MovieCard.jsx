@@ -13,7 +13,7 @@ const MovieCard = ({
     const release_year = release_date.split("-")[0];
     return (
         <div className="movie-card">
-            <img
+            <img className="text-white"
                 src={poster_path ? `${Url}/${poster_path}` : "./no-movie.png"}
                 alt={title}
             />
