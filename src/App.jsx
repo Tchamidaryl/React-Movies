@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Search from "./components/Search";
 import Spinner from "./components/Spinner";
 import MovieCard from "./components/MovieCard";
+import MovieDetail from "./detail/detail";
 import { useDebounce } from "react-use";
 import { getTrendingMovies, updateSearchCount } from "./appwrite";
 
@@ -34,7 +36,9 @@ const App = () => {
         setErrorMessage("");
         try {
             const endpoint = query
-                ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+                ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(
+                      query
+                  )}`
                 : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
             const response = await fetch(endpoint, API_OPTIONS);
 
@@ -100,61 +104,85 @@ const App = () => {
     }, []);
 
     return (
-        <main className="">
-            <div className="pattern" />
+        <Router>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <main className="">
+                            <div className="pattern" />
 
-            <div className="wrapper">
-                <header>
-                    <img src="./hero.png" alt="Hero Banner" />
-                    <h1 className="">
-                        Find <span className="text-gradient">Movies</span>{" "}
-                        You'll Enjoy Without the Hassle
-                    </h1>
-                    <Search
-                        searchTerm={searchTerm}
-                        setSearchTerm={setSearchTerm}
-                    />
-                </header>
-
-                <section className="trending">
-                    <h2>Trending Movies</h2>
-
-                    {isTrendingLoading ? (
-                        <Spinner />
-                    ) : trendingErrorMessage ? (
-                        <p className="text-red-500 my-5">{trendingErrorMessage}</p>
-                    ) : (
-                        <ul>
-                            {trendingMovies.map((movie, index) => (
-                                <li key={movie.$id}>
-                                    <p>{index + 1}</p>
-                                    <img
-                                        src={movie.poster_url}
-                                        alt={movie.title}
+                            <div className="wrapper">
+                                <header>
+                                    <img src="./hero.png" alt="Hero Banner" />
+                                    <h1 className="">
+                                        Find{" "}
+                                        <span className="text-gradient">
+                                            Movies
+                                        </span>{" "}
+                                        You'll Enjoy Without the Hassle
+                                    </h1>
+                                    <Search
+                                        searchTerm={searchTerm}
+                                        setSearchTerm={setSearchTerm}
                                     />
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </section>
+                                </header>
 
-                <section className="all-movies">
-                    <h2 className="">All Movies</h2>
+                                <section className="trending">
+                                    <h2>Trending Movies</h2>
 
-                    {isLoading ? (
-                        <Spinner />
-                    ) : errorMessage ? (
-                        <p className="text-red-500">{errorMessage}</p>
-                    ) : (
-                        <ul>
-                            {movieList.map((movie) => (
-                                <MovieCard key={movie.id} movie={movie} />
-                            ))}
-                        </ul>
-                    )}
-                </section>
-            </div>
-        </main>
+                                    {isTrendingLoading ? (
+                                        <Spinner />
+                                    ) : trendingErrorMessage ? (
+                                        <p className="text-red-500 my-5">
+                                            {trendingErrorMessage}
+                                        </p>
+                                    ) : (
+                                        <ul>
+                                            {trendingMovies.map(
+                                                (movie, index) => (
+                                                    <li key={movie.$id}>
+                                                        <p>{index + 1}</p>
+                                                        <img
+                                                            src={
+                                                                movie.poster_url
+                                                            }
+                                                            alt={movie.title}
+                                                        />
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    )}
+                                </section>
+
+                                <section className="all-movies">
+                                    <h2 className="">All Movies</h2>
+
+                                    {isLoading ? (
+                                        <Spinner />
+                                    ) : errorMessage ? (
+                                        <p className="text-red-500">
+                                            {errorMessage}
+                                        </p>
+                                    ) : (
+                                        <ul>
+                                            {movieList.map((movie) => (
+                                                <MovieCard
+                                                    key={movie.id}
+                                                    movie={movie}
+                                                />
+                                            ))}
+                                        </ul>
+                                    )}
+                                </section>
+                            </div>
+                        </main>
+                    }
+                />
+                <Route path="/movie/:id" element={<MovieDetail />} />
+            </Routes>
+        </Router>
     );
 };
 
