@@ -4,7 +4,7 @@ const Spinner = () => {
     return (
         <button
             type="button"
-            className="inline-flex items-center text-slate-200 dark:text-white bg-gray-900 dark:bg-gray-800 rounded-xl hover:bg-gray-950 hover:dark:bg-gray-900 hover:text-slate-400 shadow-xs font-medium leading-5 text-sm px-4 py-2.5 outline-none"
+            className="inline-flex items-center text-slate-200 dark:text-white bg-gray-900 dark:bg-gray-800 rounded-xl hover:bg-gray-950 hover:dark:bg-gray-900 hover:text-slate-400 shadow-xs font-medium leading-5 text-sm px-4 py-2.5 outline-none my-5"
         >
             <svg
                 aria-hidden="true"
