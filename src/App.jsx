@@ -147,7 +147,8 @@ const App = () => {
                                                             src={
                                                                 movie.poster_url
                                                             }
-                                                            alt={movie.title}
+                                                            alt={ movie.title }
+                                                            loading="lazy"
                                                         />
                                                     </li>
                                                 )

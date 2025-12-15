@@ -22,6 +22,7 @@ const MovieCard = ({
                         poster_path ? `${Url}/${poster_path}` : "./no-movie.png"
                     }
                     alt={title}
+                    loading="lazy"
                 />
                 <div className="mt-4">
                     <h3>{title}</h3>

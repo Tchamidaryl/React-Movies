@@ -119,7 +119,8 @@ const MovieDetail = () => {
                             src={
                                 movie.poster_path ? posterUrl : "./no-movie.png"
                             }
-                            alt={movie.title}
+                            alt={ movie.title }
+                            loading="lazy"
                         />
                     </div>
 
@@ -128,7 +129,7 @@ const MovieDetail = () => {
 
                         <div className="detail-meta">
                             <div className="rating">
-                                <img src=".././star.svg" alt="Star Icon" />
+                                <img src=".././star.svg" alt="Star Icon" loading="lazy" />
                                 <p>
                                     {movie.vote_average?.toFixed(1) || "N/A"}/10
                                 </p>
@@ -219,12 +220,11 @@ const MovieDetail = () => {
                         <div className="cast-list">
                             {credits.cast.slice(0, 12).map((actor) => (
                                 <div key={actor.id} className="cast-member">
-                                    {actor.profile_path && (
                                         <img
-                                            src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
-                                            alt={actor.name}
+                                            src={actor.profile_path ? `https://image.tmdb.org/t/p/w185${actor.profile_path}` : ".././no-movie.png"}
+                                            alt={ actor.name }
+                                            loading="lazy"
                                         />
-                                    )}
                                     <div className="cast-info">
                                         <p className="actor-name">
                                             {actor.name}
